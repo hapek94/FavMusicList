@@ -1,0 +1,46 @@
+<div class="go-back-button ml-3" [routerLink]="['/products']">
+  <div><i class="bi bi-arrow-left-short"></i>
+    {{ 'Go back' | translate }}</div>
+</div>
+<div class="col-md-12 text-primary">
+  <h2 *ngIf="addMode" class="text-center mt-4">
+    {{"Add new album" | translate}}
+  </h2>
+  <h2 *ngIf="!addMode" class="text-center mt-4">
+    {{"Edit album"  | translate}}
+  </h2>
+</div>
+
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-content  m-4">
+        <form [formGroup]="albumForm" (ngSubmit)="onSubmit()" class="form">
+          <div class="form-body px-3">
+            <div class="form-group my-4">
+              <label for="albumName">{{'Album Name'  | translate}}</label>
+              <input formControlName="name" class="form-control" type="text" id="albumName" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+              <span class="invalid-feedback" *ngIf="submitted && f.name.errors ">Name is required</span>
+            </div>
+            <div class="form-group my-4">
+              <label for="author">{{'Author Name'  | translate}}</label>
+              <input formControlName="author" class="form-control" type="text" id="author" [ngClass]="{ 'is-invalid': submitted && f.author.errors }">
+              <span class="invalid-feedback" *ngIf="submitted && f.author.errors ">Author name is required</span>
+            </div>
+            <div class="form-group my-4">
+              <label for="releaseDate">{{'Release Date'  | translate}}</label>
+              <input formControlName="releaseDate" class="form-control" type="date" id="releaseDate" [ngClass]="{ 'is-invalid': submitted && f.releaseDate.errors }">
+              <span class="invalid-feedback" *ngIf="submitted && f.releaseDate.errors ">Release date is required</span>
+            </div>
+            <div class="form-check my-4">
+              <input formControlName="isBest" class="form-check-input" type="checkbox" id="isBestOfBest">
+              <label for="isBestOfBest">{{'Best of the best' | translate}}</label>
+            </div>
+            <button  type="submit" class="btn btn-primary">{{'Submit' | translate}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

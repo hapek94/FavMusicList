@@ -1,0 +1,60 @@
+<div class="col-md-12 text-primary">
+  <h2 class="text-center mt-4">
+    {{"My Favourite Music List" | translate}}
+  </h2>
+</div>
+<div class="col-12 d-flex justify-content-end">
+  <button
+    type="button"
+    class="btn btn-raised btn-primary"
+    [routerLink]="['/addalbum']"
+    aria-label="Add"
+  >
+    <i class="fa fa-plus"></i>
+    {{ "Add new album"| translate}}
+  </button>
+</div>
+<div class="col-md-7 col-lg-6 col-xl-5 pl-md-0 ">
+  <input class="form-control w-100 w-sm-auto search" type="text" [(ngModel)]="filter" name="siteVal" id="siteVal" (keyup)="filterList()"
+         placeholder="{{'Search album by name' | translate}}" />
+</div>
+<div class="panel  justify-content-center">
+
+  <div class="table-responsive">
+
+    <table class="table">
+      <thead>
+      <th  scope="col" class="text-center"><span>{{'Album' | translate}}</span></th>
+      <th  scope="col" class="text-center"><span>{{'Author' | translate}}</span></th>
+      <th  scope="col" class="text-center"><span>{{'Release Date'| translate}}</span></th>
+      <th  scope="col" class="text-center"><span>{{'Best of the best'| translate}}</span></th>
+      <th  scope="col" class="text-center"><span>{{'Actions'| translate}}</span></th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let album of albums | paginate
+                        : {
+                            itemsPerPage: 10,
+                            currentPage: pageIndex,
+                            totalItems: albums.length
+                          };
+                    let i = index" class="text-center align-middle">
+        <td scope="row" [attr.data-label]="'Name' | translate">{{album.name}}</td>
+        <td [attr.data-label]="'Author' | translate">{{album.author}}</td>
+        <td [attr.data-label]="'Release Date' | translate">{{album.releaseDate}}</td>
+        <td [attr.data-label]="'Best of the best' | translate"><button (click)="addToBest(album)" [ngClass]="{'checked': album.isBest}"><i class="bi bi-star-fill"></i></button></td>
+        <td [attr.data-label]="'Actions' | translate"><div><button [routerLink]="'/editalbum/' + album.id" class="btn btn-success"><i class="bi bi-pencil"></i></button><button (click)="deleteAlbum(album.id)" class="btn btn-danger"><i class="bi bi-trash"></i></button></div></td>
+        <td></td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-between p-2">
+      <pagination-controls
+        (pageChange)="onPageChange($event)"
+        [previousLabel]="'Previous' | translate"
+        [nextLabel]="'Next' | translate"
+        [maxSize]="9"
+      ></pagination-controls>
+    </div>
+  </div>
+</div>
+

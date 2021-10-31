@@ -1,0 +1,11 @@
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  background: #343a40;
+}
+select {
+  -webkit-appearance: menulist;
+  width: 175px;
+  margin: 5px;
+  color: black;
+}

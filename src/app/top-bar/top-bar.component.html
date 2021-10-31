@@ -1,0 +1,7 @@
+<div class="top-bar">
+  <select id="language" class="form-control" (change)="setLang($event)">
+    <option [value]="lang.code" *ngFor="let lang of availableLangs">{{lang.text}}</option>
+  </select>
+</div>
+
+

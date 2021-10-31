@@ -1,0 +1,9 @@
+label {
+  padding: 0.5rem 0;
+  color: #75787d;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+input + label {
+ padding: 0;
+}
