@@ -12,7 +12,6 @@ import { TopBarComponent } from './top-bar/top-bar.component';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { InputTrimDirective } from './directives/input-trim.directive';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,6 @@ import { InputTrimDirective } from './directives/input-trim.directive';
     FavMusicListComponent,
     AddAlbumComponent,
     TopBarComponent,
-    InputTrimDirective
   ],
   imports: [
     BrowserModule,

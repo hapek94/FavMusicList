@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
-import {Observable, of, throwError} from 'rxjs';
-import {delay, dematerialize, materialize} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
 import {v4 as uuid} from 'uuid';
 import {Album} from '../fav-music.service';
 
@@ -18,7 +17,7 @@ let albums: Album[] = albumJSON ? JSON.parse(albumJSON) : [{
 @Injectable()
 export class BackendProvider implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const {url, method, headers, body} = request;
+    const {url, method, body} = request;
 
     return handleRoute();
 
@@ -52,8 +51,10 @@ export class BackendProvider implements HttpInterceptor {
     function createAlbum() {
       const album = body;
 
-      // assign album id
       album.id = uuid();
+
+      album.name.trim();
+      album.author.trim();
 
       albums.push(album);
       localStorage.setItem(key, JSON.stringify(albums));
@@ -62,12 +63,12 @@ export class BackendProvider implements HttpInterceptor {
     }
     function updateAlbum() {
       const params = body;
-      console.log(body);
+
+      params.name.trim();
+      params.author.trim();
+
       const album = albums.find(x => x.id === idFromUrl());
 
-      if (params.name !== album.name && albums.find(x => x.name === params.name)) {
-        return error(`Album with the same name: ${params.name} already exists`);
-      }
       Object.assign(album, params);
       localStorage.setItem(key, JSON.stringify(albums));
 
@@ -80,15 +81,8 @@ export class BackendProvider implements HttpInterceptor {
       return ok();
     }
 
-    // helper functions
-
     function ok(body?: any) {
       return of(new HttpResponse({status: 200, body}));
-    }
-
-    function error(message: any) {
-      return throwError({error: {message}})
-        .pipe(materialize(), dematerialize());
     }
 
     function basicDetails(album) {
