@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Album, FavMusicService} from '../fav-music.service';
 import {first} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
+import {AlbumValidators} from './album-validators';
 
 @Component({
   selector: 'app-add-album',
@@ -37,14 +38,13 @@ export class AddAlbumComponent implements OnInit {
   }
 
   get f() {
-    console.log(this.albumForm.controls)
     return this.albumForm.controls;
   }
 
   createForm(): void {
     this.albumForm = this.formBuilder.group({
-      name: ['', [ Validators.required]],
-      author: ['', [ Validators.required]],
+      name: ['', [ Validators.required, AlbumValidators.cantContainOnlyWhitespace]],
+      author: ['', [ Validators.required, AlbumValidators.cantContainOnlyWhitespace]],
       releaseDate: ['', [ Validators.required]],
       isBest: [false],
     });

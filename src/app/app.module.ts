@@ -7,18 +7,20 @@ import { FavMusicListComponent } from './fav-music-list/fav-music-list.component
 import { AddAlbumComponent } from './add-album/add-album.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import { backendProvider } from '../app/helpers/backend-provider';
+import { backendProvider } from './helpers/backend-provider';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { InputTrimDirective } from './directives/input-trim.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     FavMusicListComponent,
     AddAlbumComponent,
-    TopBarComponent
+    TopBarComponent,
+    InputTrimDirective
   ],
   imports: [
     BrowserModule,
