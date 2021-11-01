@@ -32,7 +32,7 @@ export class FavMusicListComponent implements OnInit {
       behavior: 'smooth',
     });
   }
-  deleteAlbum(id: string) {
+  deleteAlbum(id: string): void {
     if (confirm('Are you sure you want to delete this album?')) {
 
       this.favMusicService.delete(id).pipe(first()).subscribe(res => {
@@ -43,9 +43,13 @@ export class FavMusicListComponent implements OnInit {
     }
   }
 
-  addToBest(album: Album) {
+  addToBest(album: Album): void {
     album.isBest = !album.isBest;
     this.favMusicService.update(album.id, album).pipe(first()).subscribe(res => console.log(res));
+  }
+
+  identify(index, item): string {
+    return item.id;
   }
 
   filterList(): void {

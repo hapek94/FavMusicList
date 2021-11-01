@@ -12,6 +12,7 @@ import { TopBarComponent } from './top-bar/top-bar.component';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { SortDirective } from './directives/sort.directive';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     FavMusicListComponent,
     AddAlbumComponent,
     TopBarComponent,
+    SortDirective,
   ],
   imports: [
     BrowserModule,

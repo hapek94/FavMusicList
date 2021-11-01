@@ -24,11 +24,11 @@
 
     <table class="table">
       <thead>
-      <th  scope="col" class="text-center"><span>{{'Album' | translate}}</span></th>
-      <th  scope="col" class="text-center"><span>{{'Author' | translate}}</span></th>
-      <th  scope="col" class="text-center"><span>{{'Release Date'| translate}}</span></th>
-      <th  scope="col" class="text-center"><span>{{'Best of the best'| translate}}</span></th>
-      <th  scope="col" class="text-center"><span>{{'Actions'| translate}}</span></th>
+      <th scope="col" [appSort]="albums" data-order="desc" data-name="name" class="text-center"><span>{{'Album' | translate}}</span></th>
+      <th scope="col" [appSort]="albums" data-order="desc" data-name="author"  class="text-center"><span>{{'Author' | translate}}</span></th>
+      <th scope="col" [appSort]="albums" data-order="desc" data-name="releaseDate"   class="text-center"><span>{{'Release Date'| translate}}</span></th>
+      <th scope="col" [appSort]="albums" data-order="desc" data-name="isBest" class="text-center"><span>{{'Best of the best'| translate}}</span></th>
+      <th scope="col"  class="text-center"><span>{{'Actions'| translate}}</span></th>
       </thead>
       <tbody>
       <tr *ngFor="let album of albums | paginate
@@ -37,7 +37,7 @@
                             currentPage: pageIndex,
                             totalItems: albums.length
                           };
-                    let i = index" class="text-center align-middle">
+                   trackBy: identify" class="text-center align-middle">
         <td scope="row" [attr.data-label]="'Name' | translate">{{album.name}}</td>
         <td [attr.data-label]="'Author' | translate">{{album.author}}</td>
         <td [attr.data-label]="'Release Date' | translate">{{album.releaseDate}}</td>

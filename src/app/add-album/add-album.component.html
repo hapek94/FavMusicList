@@ -16,7 +16,7 @@
   <div class="col-md-6">
     <div class="card">
       <div class="card-content  m-4">
-        <form [formGroup]="albumForm" (ngSubmit)="onSubmit()" class="form">
+        <form (keydown.enter)="$event.preventDefault()" [formGroup]="albumForm" (ngSubmit)="onSubmit()" class="form">
           <div class="form-body px-3">
             <div class="form-group my-4">
               <label for="albumName">{{'Album Name'  | translate}}</label>
@@ -38,6 +38,13 @@
             <div class="form-check my-4">
               <input formControlName="isBest" class="form-check-input" type="checkbox" id="isBestOfBest">
               <label for="isBestOfBest">{{'Best of the best' | translate}}</label>
+            </div>
+            <div formArrayName="songList" class="form-group my-4">
+              <label for="song">{{'Song List' | translate}} <button type="button" (click)="addSong()">Add song</button></label>
+              <div  *ngFor="let song of songList.controls let i = index" [formGroupName]="i">
+                {{i + 1 + '.'}}<input formControlName="song" class="form-control" type="text" id="song">
+              </div>
+
             </div>
             <button  type="submit" class="btn btn-primary">{{'Submit' | translate}}</button>
           </div>

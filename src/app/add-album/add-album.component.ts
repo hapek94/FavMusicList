@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Album, FavMusicService} from '../fav-music.service';
 import {first} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -40,17 +40,26 @@ export class AddAlbumComponent implements OnInit {
   get f() {
     return this.albumForm.controls;
   }
+  get songList() {
+    return this.albumForm.get('songList') as FormArray;
+  }
+  addSong() {
+    console.log(this.songList)
+    this.songList.push(this.formBuilder.group({song: ''}));
+  }
+
 
   createForm(): void {
     this.albumForm = this.formBuilder.group({
       name: ['', [ Validators.required, AlbumValidators.cantContainOnlyWhitespace]],
       author: ['', [ Validators.required, AlbumValidators.cantContainOnlyWhitespace]],
       releaseDate: ['', [ Validators.required]],
+      songList: this.formBuilder.array([this.formBuilder.group({song: ''})]),
       isBest: [false],
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     this.submitted = true;
     if (this.albumForm.invalid) {
       return;
@@ -62,7 +71,7 @@ export class AddAlbumComponent implements OnInit {
     }
   }
 
-  createAlbum() {
+  createAlbum(): void {
     this.favMusicService.create(this.albumForm.value).pipe(first()).subscribe(res => {
       console.log(res);
       if (res.status === 200) {
@@ -71,7 +80,7 @@ export class AddAlbumComponent implements OnInit {
     });
   }
 
-  updateAlbum() {
+  updateAlbum(): void {
     this.favMusicService.update(this.id, this.albumForm.value).pipe(first()).subscribe(res => {
       if (res.status === 200) {
         this.router.navigate(['/']);
