@@ -39,6 +39,6 @@ export interface Album {
   name: string;
   author: string;
   releaseDate: Date;
-  songList: [string];
+  songList: [{song: string}];
   isBest: boolean;
 }

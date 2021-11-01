@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Album, FavMusicService} from '../fav-music.service';
 import {first} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -32,7 +32,12 @@ export class AddAlbumComponent implements OnInit {
     this.createForm();
     if (!this.addMode) {
       this.favMusicService.getById(this.id).pipe(first()).subscribe(album => {
-        this.albumForm.patchValue(album);
+        if (album) {
+          album.songList.forEach( () => {
+            this.songList.push(this.buildSong());
+          });
+          this.albumForm.patchValue(album);
+        }
       });
     }
   }
@@ -40,21 +45,28 @@ export class AddAlbumComponent implements OnInit {
   get f() {
     return this.albumForm.controls;
   }
+
   get songList() {
     return this.albumForm.get('songList') as FormArray;
   }
+
+  buildSong(): FormControl {
+    return this.formBuilder.control('', [Validators.required, AlbumValidators.cantContainOnlyWhitespace]);
+  }
   addSong() {
-    console.log(this.songList)
-    this.songList.push(this.formBuilder.group({song: ''}));
+    this.songList.push(this.buildSong());
+  }
+  deleteSong(index: number): void {
+    this.songList.removeAt(index);
   }
 
 
   createForm(): void {
     this.albumForm = this.formBuilder.group({
-      name: ['', [ Validators.required, AlbumValidators.cantContainOnlyWhitespace]],
-      author: ['', [ Validators.required, AlbumValidators.cantContainOnlyWhitespace]],
-      releaseDate: ['', [ Validators.required]],
-      songList: this.formBuilder.array([this.formBuilder.group({song: ''})]),
+      name: ['', [Validators.required, AlbumValidators.cantContainOnlyWhitespace]],
+      author: ['', [Validators.required, AlbumValidators.cantContainOnlyWhitespace]],
+      releaseDate: ['', [Validators.required]],
+      songList: this.formBuilder.array([this.buildSong()]),
       isBest: [false],
     });
   }
@@ -67,7 +79,7 @@ export class AddAlbumComponent implements OnInit {
     if (this.addMode) {
       this.createAlbum();
     } else {
-       this.updateAlbum();
+      this.updateAlbum();
     }
   }
 
@@ -86,5 +98,5 @@ export class AddAlbumComponent implements OnInit {
         this.router.navigate(['/']);
       }
     });
-}
+  }
 }

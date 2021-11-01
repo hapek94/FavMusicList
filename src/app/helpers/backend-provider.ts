@@ -50,7 +50,7 @@ export class BackendProvider implements HttpInterceptor {
 
     function createAlbum() {
       const album = body;
-
+      console.log(album);
       album.id = uuid();
 
       album.name.trim();
@@ -86,8 +86,8 @@ export class BackendProvider implements HttpInterceptor {
     }
 
     function basicDetails(album) {
-      const {id, name, releaseDate, author, isBest} = album;
-      return {id, name, releaseDate, author, isBest};
+      const {id, name, releaseDate, songList, author, isBest} = album;
+      return {id, name, releaseDate, songList, author, isBest};
     }
 
     function idFromUrl() {
