@@ -53,8 +53,12 @@ export class FavMusicListComponent implements OnInit {
 
   addToBest(album: Album): void {
     album.isBest = !album.isBest;
-    this.favMusicService.update(album.id, album).pipe(first()).subscribe(res => console.log(res));
-  }
+    this.favMusicService.update(album.id, album).pipe(first()).subscribe(res => {
+      if (res.status !== 200) {
+        this.toastr.error(this.translate.instant('Unexpected error!'));
+      }});
+    }
+
 
   identify(index, item): string {
     return item.id;

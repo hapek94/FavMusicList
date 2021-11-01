@@ -44,7 +44,6 @@ export class BackendProvider implements HttpInterceptor {
 
     function createAlbum() {
       const album = body;
-      console.log(album);
       album.id = uuid();
 
       album.name.trim();

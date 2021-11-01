@@ -18,7 +18,6 @@ export class TopBarComponent implements OnInit {
 
   }
   setLang(event): void {
-    console.log(event.target.value);
     this.translate.use(event.target.value);
   }
 }

@@ -89,7 +89,6 @@ export class AddAlbumComponent implements OnInit {
 
   createAlbum(): void {
     this.favMusicService.create(this.albumForm.value).pipe(first()).subscribe(res => {
-      console.log(res);
       if (res.status === 200) {
         this.toastr.success(this.translate.instant('Album created successfully!'));
         this.router.navigate(['/']);
