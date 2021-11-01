@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Album, FavMusicService} from '../fav-music.service';
 import {first} from 'rxjs/operators';
+import {ToastrService} from 'ngx-toastr';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-fav-music-list',
@@ -16,7 +18,10 @@ export class FavMusicListComponent implements OnInit {
 
   pageIndex: 1;
 
-  constructor(private favMusicService: FavMusicService) {
+  constructor(
+    private favMusicService: FavMusicService,
+    private toastr: ToastrService,
+    private translate: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -33,11 +38,14 @@ export class FavMusicListComponent implements OnInit {
     });
   }
   deleteAlbum(id: string): void {
-    if (confirm('Are you sure you want to delete this album?')) {
+    if (confirm(this.translate.instant('Are you sure you want to delete this album?'))) {
 
       this.favMusicService.delete(id).pipe(first()).subscribe(res => {
         if (res.status === 200) {
+          this.toastr.success(this.translate.instant('Album deleted successfully!'));
           this.albums = this.albums.filter(album => album.id !== id);
+        } else {
+          this.toastr.error(this.translate.instant('Unexpected error!'));
         }
       });
     }

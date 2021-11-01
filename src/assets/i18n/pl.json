@@ -23,6 +23,11 @@
   "Author name may not consist solely of whitespaces": "Imię i nazwisko autora nie może składać się wyłącznie z białych znaków",
   "Album name may not consist solely of whitespaces": "Nazwa albumu nie może składać się wyłącznie z białych znaków",
   "Song name cannot be empty": "Nazwa utworu nie może być pusta",
-  "No data to display": "Brak danych do wyświetlenia"
-
+  "No data to display": "Brak danych do wyświetlenia",
+  "Album deleted successfully": "Album został pomyślnie usunięty",
+  "Album created successfully!": "Album dodany pomyślnie!",
+  "Album updated successfully!": "Album został zaktualizowany pomyślnie!",
+  "Unexpected error!": "Niespodziewany błąd!",
+  "Are you sure you want to delete this album?": "Czy na pewno chcesz usunąć ten album?",
+  "Warning: Are you sure you want to discard all changes?": "Ostrzeżenie: czy na pewno chcesz odrzucić wszystkie zmiany?"
 }

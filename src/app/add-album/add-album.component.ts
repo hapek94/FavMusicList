@@ -4,6 +4,8 @@ import {Album, FavMusicService} from '../fav-music.service';
 import {first} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AlbumValidators} from './album-validators';
+import {ToastrService} from 'ngx-toastr';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-album',
@@ -21,7 +23,9 @@ export class AddAlbumComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private favMusicService: FavMusicService,
               private route: ActivatedRoute,
-              private router: Router
+              private router: Router,
+              private toastr: ToastrService,
+              private translate: TranslateService
   ) {
   }
 
@@ -87,7 +91,10 @@ export class AddAlbumComponent implements OnInit {
     this.favMusicService.create(this.albumForm.value).pipe(first()).subscribe(res => {
       console.log(res);
       if (res.status === 200) {
+        this.toastr.success(this.translate.instant('Album created successfully!'));
         this.router.navigate(['/']);
+      } else {
+        this.toastr.error(this.translate.instant('Unexpected error!'));
       }
     });
   }
@@ -95,7 +102,10 @@ export class AddAlbumComponent implements OnInit {
   updateAlbum(): void {
     this.favMusicService.update(this.id, this.albumForm.value).pipe(first()).subscribe(res => {
       if (res.status === 200) {
+        this.toastr.success(this.translate.instant('Album updated successfully!'));
         this.router.navigate(['/']);
+      } else {
+        this.toastr.error(this.translate.instant('Unexpected error!'));
       }
     });
   }

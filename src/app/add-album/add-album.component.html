@@ -40,7 +40,7 @@
               <label for="isBestOfBest">{{'Best of the best' | translate}}</label>
             </div>
             <div class=" form-group my-4">
-              <label for="song">{{'Song List' | translate}} <button type="button" class="btn btn-success" (click)="addSong()"><i class="bi bi-plus"></i></button></label>
+              <label for="song">{{'Song List' | translate}} </label>
               <div formArrayName="songList" >
               <div class="my-4"  *ngFor="let song of songList.controls let i = index">
                 <div class="d-flex">
@@ -50,7 +50,13 @@
                 <span class="text-danger mx-4" *ngIf="submitted && (song.hasError('required') || song.hasError('cantContainOnlyWhitespace'))">{{'Song name cannot be empty' | translate}}</span>
               </div>
               </div>
+              <div class="d-flex justify-content-end w-75">
+                <button type="button" class="btn btn-success add-button" (click)="addSong()"><i class="bi bi-plus"></i></button>
+
+              </div>
+
             </div>
+
             <button  type="submit" class="btn btn-primary">{{'Submit' | translate}}</button>
           </div>
         </form>
