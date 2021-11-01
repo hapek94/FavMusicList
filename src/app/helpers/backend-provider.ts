@@ -6,13 +6,7 @@ import {Album} from '../fav-music.service';
 
 const key = 'albumKey';
 const albumJSON = localStorage.getItem(key);
-let albums: Album[] = albumJSON ? JSON.parse(albumJSON) : [{
-  id: '1',
-  author: 'Łukasz Hapek',
-  name: 'Test',
-  isBest: true,
-  releaseDate: '2021-09-28'
-}];
+let albums: Album[] = albumJSON ? JSON.parse(albumJSON) : [];
 
 @Injectable()
 export class BackendProvider implements HttpInterceptor {

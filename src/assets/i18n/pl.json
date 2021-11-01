@@ -6,11 +6,23 @@
   "Author Name": "Autor albumu",
   "Release Date": "Data wydania",
   "Best of the best": "Najlepszy z najlepszych",
+  "Song List": "Lista utworów",
   "Submit": "Zatwierdź",
   "My Favourite Music List": "Moja ulubiona muzyka",
   "Album": "Album",
   "Author": "Autor",
   "Actions": "Akcje",
   "Next": "Następna",
-  "Previous": "Poprzednia"
+  "Previous": "Poprzednia",
+  "Search by album name or author": "Wyszukaj po nazwie albumu lub autorze",
+  "Enter album name here": "Wpisz nazwę albumu",
+  "Enter song name here": "Wpisz nazwę utworu",
+  "Enter album author here": "Wpisz autora albumu",
+  "Release date is required": "Data wydania albumu jest wymagana",
+  "Album name is required": "Nazwa albumu jest wymagana",
+  "Author name may not consist solely of whitespaces": "Imię i nazwisko autora nie może składać się wyłącznie z białych znaków",
+  "Album name may not consist solely of whitespaces": "Nazwa albumu nie może składać się wyłącznie z białych znaków",
+  "Song name cannot be empty": "Nazwa utworu nie może być pusta",
+  "No data to display": "Brak danych do wyświetlenia"
+
 }

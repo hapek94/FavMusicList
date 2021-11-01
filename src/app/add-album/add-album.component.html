@@ -20,13 +20,13 @@
           <div class="form-body px-3">
             <div class="form-group my-4">
               <label for="albumName">{{'Album Name'  | translate}}</label>
-              <input appInputTrim formControlName="name" class="form-control w-75" type="text" id="albumName" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+              <input appInputTrim formControlName="name" [placeholder]="'Enter album name here' | translate" class="form-control w-75" type="text" id="albumName" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
               <span class="invalid-feedback" *ngIf="submitted && f.name.errors?.required &&  !f.name.errors.cantContainOnlyWhitespace">{{'Album name is required'}}</span>
               <span class="invalid-feedback" *ngIf="submitted && f.name.errors?.cantContainOnlyWhitespace ">{{'Album name may not consist solely of whitespaces'}}</span>
             </div>
             <div class="form-group my-4">
               <label for="author">{{'Author Name'  | translate}}</label>
-              <input appInputTrim formControlName="author" class="form-control w-75" type="text" id="author" [ngClass]="{ 'is-invalid': submitted && f.author.errors }">
+              <input appInputTrim formControlName="author" [placeholder]="'Enter album author here' | translate" class="form-control w-75" type="text" id="author" [ngClass]="{ 'is-invalid': submitted && f.author.errors }">
               <span class="invalid-feedback" *ngIf="submitted && f.author.errors?.required && f.author.errors.cantContainOnlyWhitespace ">Author name is required</span>
               <span class="invalid-feedback" *ngIf="submitted && f.author.errors?.cantContainOnlyWhitespace ">{{'Author name may not consist solely of whitespaces'}}</span>
             </div>
@@ -45,7 +45,7 @@
               <div class="my-4"  *ngFor="let song of songList.controls let i = index">
                 <div class="d-flex">
                   <label for="song">{{i + 1 + '.'}}</label>
-                  <input appInputTrim [formControlName]="i.toString()" class="form-control mx-2 w-75" type="text" id="song" [ngClass]="{ 'is-invalid': submitted && song.hasError('required') }"><button (click)="deleteSong(i)" class="btn btn-danger"><i class="bi bi-dash"></i></button>
+                  <input appInputTrim [formControlName]="i.toString()" [placeholder]="'Enter song name here' | translate" class="form-control mx-2 w-75" type="text" id="song" [ngClass]="{ 'is-invalid': submitted && song.hasError('required') }"><button (click)="deleteSong(i)" class="btn btn-danger"><i class="bi bi-dash"></i></button>
                 </div>
                 <span class="text-danger mx-4" *ngIf="submitted && (song.hasError('required') || song.hasError('cantContainOnlyWhitespace'))">{{'Song name cannot be empty' | translate}}</span>
               </div>
